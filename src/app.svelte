@@ -15,14 +15,18 @@
   let consoleOutput = 'ready...\n';
   let ramUsed = 0;
   let ramTotal = 524288;
-  let renderer = localStorage.getItem('bartcode_renderer') || 'zelos';
   let running = false;
   let stopBartcode = null;
   let fileOpen = false;
   let fileInput;
   let toolsOpen = false;
   let prefsOpen = false;
-  let shadersEnabled = localStorage.getItem('bartcode_shaders') === 'true';
+  let renderer = 'zelos';
+  let shadersEnabled = false;
+  try {
+    renderer = localStorage.getItem('bartcode_renderer') || 'zelos';
+    shadersEnabled = localStorage.getItem('bartcode_shaders') === 'true';
+  } catch (_) {}
   let playermode = false;
   let projectFile = null;
 
