@@ -248,3 +248,19 @@ body {
   position: relative;
   isolation: isolate;
 }
+
+.player-mode .navbar {
+  display: none;
+}
+
+.player-mode .workspace {
+  display: none;
+}
+
+.player-mode .editor-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}

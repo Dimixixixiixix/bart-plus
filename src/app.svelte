@@ -23,6 +23,27 @@
   let toolsOpen = false;
   let prefsOpen = false;
   let shadersEnabled = localStorage.getItem('bartcode_shaders') === 'true';
+  let playermode = false;
+  let projectFile = null;
+
+  async function loadProjectFromURL(url) {
+    try {
+      let response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      let state = await response.json();
+      Blockly.serialization.workspaces.load(state, workspace);
+      if (playermode) {
+        handleRun();
+      }
+    } catch (err) {
+      console.error(err);
+      if (playermode) {
+        consoleOutput = 'Error loading project: ' + err.message + '\n';
+      } else {
+        alert('Failed to load project from URL: ' + err.message);
+      }
+    }
+  }
 
   function handleRun() {
     if (running && stopBartcode) {
@@ -136,72 +157,86 @@
     });
     document.addEventListener('keydown', handleKeydown);
     document.addEventListener('click', closeMenus);
+
+    let params = new URLSearchParams(window.location.search);
+    playermode = params.get('playermode') === 'true';
+    projectFile = params.get('projectFile');
+
+    if (playermode) {
+      document.title = 'Bartcode Player';
+    }
+
+    if (projectFile) {
+      loadProjectFromURL(projectFile);
+    }
   });
 </script>
 
-<nav class="navbar">
-  <div class="navbar-left">
-    <div class="navbar-brand">Bartcode</div>
-    <div class="file-menu">
-      <button class="file-btn" on:click={() => fileOpen = !fileOpen}>File</button>
-      {#if fileOpen}
-        <div class="file-dropdown">
-          <button class="dropdown-item" on:click={handleSave}>Save</button>
-          <button class="dropdown-item" on:click={() => { fileOpen = false; fileInput.click(); }}>Load</button>
-        </div>
-      {/if}
+<div class="app-root" class:player-mode={playermode}>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <div class="navbar-brand">Bartcode</div>
+      <div class="file-menu">
+        <button class="file-btn" on:click={() => fileOpen = !fileOpen}>File</button>
+        {#if fileOpen}
+          <div class="file-dropdown">
+            <button class="dropdown-item" on:click={handleSave}>Save</button>
+            <button class="dropdown-item" on:click={() => { fileOpen = false; fileInput.click(); }}>Load</button>
+          </div>
+        {/if}
+      </div>
+      <div class="tools-menu">
+        <button class="file-btn" on:click={() => toolsOpen = !toolsOpen}>Tools</button>
+        {#if toolsOpen}
+          <div class="file-dropdown">
+            <button class="dropdown-item" on:click={() => { toolsOpen = false; prefsOpen = true; }}>Preferences</button>
+          </div>
+        {/if}
+      </div>
     </div>
-    <div class="tools-menu">
-      <button class="file-btn" on:click={() => toolsOpen = !toolsOpen}>Tools</button>
-      {#if toolsOpen}
-        <div class="file-dropdown">
-          <button class="dropdown-item" on:click={() => { toolsOpen = false; prefsOpen = true; }}>Preferences</button>
-        </div>
-      {/if}
-    </div>
-  </div>
-  <RamBar {ramUsed} {ramTotal} />
-  <div class="toolbar">
-    <label class="renderer-label">
-      Renderer:
-      <select on:change={handleRendererChange}>
-        <option value="geras" selected={renderer === 'geras'}>Geras</option>
-        <option value="thrasos" selected={renderer === 'thrasos'}>Thrasos</option>
-        <option value="zelos" selected={renderer === 'zelos'}>Zelos</option>
-      </select>
-    </label>
-    <button on:click={handleRun}>Run code</button>
-    <button class="stop-btn" on:click={handleStop} disabled={!running}>Stop code</button>
-  </div>
-</nav>
-
-<input type="file" accept=".bcp" bind:this={fileInput} on:change={handleLoad} style="display: none">
-
-<div class="editor-container">
-  <div bind:this={blocklyDiv} class="workspace"></div>
-  <div class="console">
-    {consoleOutput}
-    {#if shadersEnabled}
-      <CrtOverlay text={consoleOutput} />
-    {/if}
-  </div>
-</div>
-
-{#if prefsOpen}
-  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-  <div class="modal-overlay" on:click={closePrefs}></div>
-  <div class="modal">
-    <div class="modal-header">
-      <span>Preferences</span>
-      <button class="modal-close" on:click={closePrefs}>&times;</button>
-    </div>
-    <div class="modal-body">
-      <label class="pref-row">
-        <input type="checkbox" bind:checked={shadersEnabled} on:change={() => localStorage.setItem('bartcode_shaders', shadersEnabled)} />
-        <span>Special Shaders (CRT effect)</span>
+    <RamBar {ramUsed} {ramTotal} />
+    <div class="toolbar">
+      <label class="renderer-label">
+        Renderer:
+        <select on:change={handleRendererChange}>
+          <option value="geras" selected={renderer === 'geras'}>Geras</option>
+          <option value="thrasos" selected={renderer === 'thrasos'}>Thrasos</option>
+          <option value="zelos" selected={renderer === 'zelos'}>Zelos</option>
+        </select>
       </label>
+      <button on:click={handleRun}>Run code</button>
+      <button class="stop-btn" on:click={handleStop} disabled={!running}>Stop code</button>
+    </div>
+  </nav>
+
+  <input type="file" accept=".bcp" bind:this={fileInput} on:change={handleLoad} style="display: none">
+
+  <div class="editor-container">
+    <div bind:this={blocklyDiv} class="workspace"></div>
+    <div class="console">
+      {consoleOutput}
+      {#if shadersEnabled}
+        <CrtOverlay text={consoleOutput} />
+      {/if}
     </div>
   </div>
-{/if}
+
+  {#if prefsOpen}
+    <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+    <div class="modal-overlay" on:click={closePrefs}></div>
+    <div class="modal">
+      <div class="modal-header">
+        <span>Preferences</span>
+        <button class="modal-close" on:click={closePrefs}>&times;</button>
+      </div>
+      <div class="modal-body">
+        <label class="pref-row">
+          <input type="checkbox" bind:checked={shadersEnabled} on:change={() => localStorage.setItem('bartcode_shaders', shadersEnabled)} />
+          <span>Special Shaders (CRT effect)</span>
+        </label>
+      </div>
+    </div>
+  {/if}
+</div>
 
 
