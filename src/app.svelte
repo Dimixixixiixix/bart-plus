@@ -6,7 +6,6 @@
   import { toolboxXML } from './blocks/toolbox.js';
   import { initKeyboard } from './keyboard.js';
   import RamBar from './RamBar.svelte';
-  import CrtOverlay from './CrtOverlay.svelte';
   import './blocks/bartcode_blocks.js';
   import './app.css';
 
@@ -189,8 +188,13 @@
           </div>
         {/if}
       </div>
-      <div class="tools-menu">
-        
+      <div class="file-menu">
+        <button class="file-btn" on:click={() => toolsOpen = !toolsOpen}>Tools</button>
+        {#if toolsOpen}
+          <div class="file-dropdown">
+            <button class="dropdown-item" on:click={() => { prefsOpen = true; toolsOpen = false; }}>Preferences</button>
+          </div>
+        {/if}
     </div>
     <RamBar {ramUsed} {ramTotal} />
     <div class="toolbar">
