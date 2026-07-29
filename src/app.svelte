@@ -160,7 +160,7 @@
 
     let params = new URLSearchParams(window.location.search);
     playermode = params.get('playermode') === 'true';
-    projectFile = params.get('projectFile');
+    projectFile = params.get('projectfile');
 
     if (playermode) {
       document.title = 'Bartcode Player';
