@@ -15,23 +15,29 @@
 
 <style>
   .ram-bar {
-    padding: 4px 12px;
-    font-family: monospace;
+    padding: 6px 14px;
+    font-family: 'Ubuntu', sans-serif;
     font-size: 12px;
-    color: #ccc;
+    color: #2b2b2b;
     min-width: 200px;
+    background: #ffffff;
+    border: 1px solid #d9d0c7;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
   .ram-label {
-    margin-bottom: 2px;
+    margin-bottom: 4px;
+    font-weight: 500;
   }
   .ram-track {
     height: 8px;
-    background: #333;
+    background: #eee5de;
     border-radius: 4px;
     overflow: hidden;
   }
   .ram-fill {
     height: 100%;
+    background: #ff7700;
     border-radius: 4px;
     transition: width 0.2s, background 0.2s;
   }
