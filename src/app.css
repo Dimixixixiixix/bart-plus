@@ -249,6 +249,47 @@ body {
   isolation: isolate;
 }
 
+.console-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.player-controls button {
+  padding: 8px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.player-controls button:hover {
+  background: #218838;
+}
+
+.player-controls button.stop-btn {
+  background: #dc3545;
+}
+
+.player-controls button.stop-btn:hover {
+  background: #c82333;
+}
+
+.player-controls button.stop-btn:disabled {
+  background: #6c757d;
+  cursor: default;
+}
+
 .player-mode .navbar {
   display: none;
 }

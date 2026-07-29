@@ -213,10 +213,18 @@
 
   <div class="editor-container">
     <div bind:this={blocklyDiv} class="workspace"></div>
-    <div class="console">
-      {consoleOutput}
-      {#if shadersEnabled}
-        <CrtOverlay text={consoleOutput} />
+    <div class="console-area">
+      <div class="console">
+        {consoleOutput}
+        {#if shadersEnabled}
+          <CrtOverlay text={consoleOutput} />
+        {/if}
+      </div>
+      {#if playermode}
+        <div class="player-controls">
+          <button on:click={handleRun}>Run code</button>
+          <button class="stop-btn" on:click={handleStop} disabled={!running}>Stop code</button>
+        </div>
       {/if}
     </div>
   </div>
