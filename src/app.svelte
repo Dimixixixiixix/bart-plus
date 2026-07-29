@@ -190,13 +190,7 @@
         {/if}
       </div>
       <div class="tools-menu">
-        <button class="file-btn" on:click={() => toolsOpen = !toolsOpen}>Tools</button>
-        {#if toolsOpen}
-          <div class="file-dropdown">
-            <button class="dropdown-item" on:click={() => { toolsOpen = false; prefsOpen = true; }}>Preferences</button>
-          </div>
-        {/if}
-      </div>
+        
     </div>
     <RamBar {ramUsed} {ramTotal} />
     <div class="toolbar">
