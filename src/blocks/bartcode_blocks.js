@@ -5,7 +5,7 @@ import * as Blockly from 'blockly';
 Blockly.Blocks['bart_on_run'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField('When run');
+        .appendField('when code run');
     this.setPreviousStatement(false, null);
     this.setNextStatement(true, null);
     this.setColour(290);
