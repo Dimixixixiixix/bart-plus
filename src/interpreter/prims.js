@@ -1,5 +1,6 @@
 import { isKeyPressed, getLastKey, isAnyKeyPressed } from '../keyboard.js';
 import { primitiveSpecs } from './specs.js';
+import { addAlias, removeAlias, clearAliases } from '../tracking.js';
 
 export function primPut(arg, context) {
   let textVal = evaluateExpression(arg, context);
@@ -367,6 +368,42 @@ function evaluateExpression(expr, context) {
     return isAnyKeyPressed() ? 'true' : 'false';
   }
 
+  // CURRENTTIME
+  if (expr.startsWith('CURRENTTIME(') && expr.endsWith(')')) {
+    let inner = expr.substring(12, expr.length - 1);
+    let unit = evaluateExpression(inner, context).replace(/"/g, '');
+    let now = new Date();
+    switch (unit) {
+      case 'seconds': return now.getSeconds().toString();
+      case 'minutes': return now.getMinutes().toString();
+      case 'hours': return now.getHours().toString();
+      case 'day': return now.getDate().toString();
+      case 'month': return (now.getMonth() + 1).toString();
+      case 'year': return now.getFullYear().toString();
+      default: return now.toLocaleString();
+    }
+  }
+
+  // TRACKCOL
+  if (expr.startsWith('TRACKCOL(') && expr.endsWith(')')) {
+    let inner = expr.substring(9, expr.length - 1);
+    let alias = evaluateExpression(inner, context).replace(/"/g, '');
+    if (context.tracking && context.tracking[alias]) {
+      return context.tracking[alias].col.toString();
+    }
+    return '0';
+  }
+
+  // TRACKROW
+  if (expr.startsWith('TRACKROW(') && expr.endsWith(')')) {
+    let inner = expr.substring(9, expr.length - 1);
+    let alias = evaluateExpression(inner, context).replace(/"/g, '');
+    if (context.tracking && context.tracking[alias]) {
+      return context.tracking[alias].row.toString();
+    }
+    return '0';
+  }
+
   // LOAD
   if (expr.startsWith('LOAD(') && expr.endsWith(')')) {
     let inner = expr.substring(5, expr.length - 1);
@@ -488,6 +525,16 @@ export function primMove(arg, context) {
 
     context.grid[fromRow][fromCol] = ' ';
     context.grid[toRow][toCol] = charToMove;
+
+    if (context.tracking) {
+      for (let alias in context.tracking) {
+        let t = context.tracking[alias];
+        if (t.col === fromCol && t.row === fromRow) {
+          t.col = toCol;
+          t.row = toRow;
+        }
+      }
+    }
   }
 }
 
@@ -519,6 +566,39 @@ export function primReturn(arg, context) {
   if (context.callStack.length > 0) {
     context.pc = context.callStack.pop();
   }
+}
+
+export function primTrackStart(arg, context) {
+  let inner = arg.trim();
+  if (inner.startsWith('(') && inner.endsWith(')')) {
+    inner = inner.substring(1, inner.length - 1);
+  }
+  let parts = splitByCommaOutsideQuotes(inner);
+  if (parts.length < 3) return;
+  let col = parseInt(evaluateExpression(parts[0].trim(), context), 10) || 0;
+  let row = parseInt(evaluateExpression(parts[1].trim(), context), 10) || 0;
+  let alias = evaluateExpression(parts[2].trim(), context);
+
+  context.tracking = context.tracking || {};
+  context.tracking[alias] = { col, row };
+  addAlias(alias);
+}
+
+export function primTrackStopAll(arg, context) {
+  context.tracking = {};
+  clearAliases();
+}
+
+export function primTrackStop(arg, context) {
+  let inner = arg.trim();
+  if (inner.startsWith('(') && inner.endsWith(')')) {
+    inner = inner.substring(1, inner.length - 1);
+  }
+  let alias = evaluateExpression(inner, context);
+  if (context.tracking) {
+    delete context.tracking[alias];
+  }
+  removeAlias(alias);
 }
 
 function splitByCommaOutsideQuotes(str) {

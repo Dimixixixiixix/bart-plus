@@ -5,6 +5,7 @@
   import { runBartcode } from './interpreter/interpreter.js';
   import { toolboxXML } from './blocks/toolbox.js';
   import { initKeyboard } from './keyboard.js';
+  import { clearAliases } from './tracking.js';
   import RamBar from './RamBar.svelte';
   import './blocks/bartcode_blocks.js';
   import './app.css';
@@ -21,10 +22,12 @@
   let toolsOpen = false;
   let prefsOpen = false;
   let renderer = 'zelos';
-  let shadersEnabled = false;
+  let soundEnabled = true;
+  let theme = 'dark';
   try {
     renderer = localStorage.getItem('bartcode_renderer') || 'zelos';
-    shadersEnabled = localStorage.getItem('bartcode_shaders') === 'true';
+    soundEnabled = localStorage.getItem('bartcode_sound') !== 'false';
+    theme = localStorage.getItem('bartcode_theme') || 'dark';
   } catch (_) {}
   let playermode = false;
   let projectFile = null;
@@ -34,6 +37,7 @@
       let response = await fetch(url);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       let state = await response.json();
+      clearAliases();
       Blockly.serialization.workspaces.load(state, workspace);
       if (playermode) {
         handleRun();
@@ -52,6 +56,7 @@
     if (running && stopBartcode) {
       stopBartcode.stop();
     }
+    clearAliases();
     const code = bartcodeGenerator.workspaceToCode(workspace);
     running = true;
     stopBartcode = runBartcode(code, (newOutput) => {
@@ -73,11 +78,11 @@
     running = false;
   }
 
-  function handleRendererChange(e) {
-    let newRenderer = e.target.value;
+  function setRenderer(newRenderer) {
     if (newRenderer === renderer) return;
     localStorage.setItem('bartcode_renderer', newRenderer);
     let state = Blockly.serialization.workspaces.save(workspace);
+    clearAliases();
     workspace.dispose();
     renderer = newRenderer;
     workspace = Blockly.inject(blocklyDiv, {
@@ -89,6 +94,10 @@
       })
     });
     Blockly.serialization.workspaces.load(state, workspace);
+  }
+
+  function handleRendererChange(e) {
+    setRenderer(e.target.value);
   }
 
   function handleSave() {
@@ -114,6 +123,7 @@
     reader.onload = (event) => {
       try {
         let state = JSON.parse(event.target.result);
+        clearAliases();
         Blockly.serialization.workspaces.load(state, workspace);
       } catch (err) {
         alert('Failed to load project: ' + err.message);
@@ -143,6 +153,10 @@
     }
   }
 
+  function savePref(key, value) {
+    try { localStorage.setItem(key, value); } catch (_) {}
+  }
+
   function closePrefs() {
     prefsOpen = false;
     toolsOpen = false;
@@ -169,6 +183,8 @@
       document.title = 'Bartcode Player';
     }
 
+    clearAliases();
+
     if (projectFile) {
       loadProjectFromURL(projectFile);
     }
@@ -188,25 +204,20 @@
           </div>
         {/if}
       </div>
-      <div class="file-menu">
+      <div class="file-menu tools-menu">
         <button class="file-btn" on:click={() => toolsOpen = !toolsOpen}>Tools</button>
         {#if toolsOpen}
           <div class="file-dropdown">
             <button class="dropdown-item" on:click={() => { prefsOpen = true; toolsOpen = false; }}>Preferences</button>
           </div>
         {/if}
+      </div>
     </div>
-    <RamBar {ramUsed} {ramTotal} />
-    <div class="toolbar">
-      <label class="renderer-label">
-        Renderer:
-        <select on:change={handleRendererChange}>
-          <option value="geras" selected={renderer === 'geras'}>Geras</option>
-          <option value="thrasos" selected={renderer === 'thrasos'}>Thrasos</option>
-          <option value="zelos" selected={renderer === 'zelos'}>Zelos</option>
-        </select>
-      </label>
-      <button on:click={handleRun}>Run code</button>
+    <div class="navbar-center">
+      <RamBar {ramUsed} {ramTotal} />
+    </div>
+    <div class="navbar-right">
+      <button class="run-btn" on:click={handleRun}>Run code</button>
       <button class="stop-btn" on:click={handleStop} disabled={!running}>Stop code</button>
     </div>
   </nav>
@@ -216,11 +227,8 @@
   <div class="editor-container">
     <div bind:this={blocklyDiv} class="workspace"></div>
     <div class="console-area">
-      <div class="console">
+      <div class="console console-theme-{theme}">
         {consoleOutput}
-        {#if shadersEnabled}
-          <CrtOverlay text={consoleOutput} />
-        {/if}
       </div>
       {#if playermode}
         <div class="player-controls">
@@ -241,8 +249,24 @@
       </div>
       <div class="modal-body">
         <label class="pref-row">
-          <input type="checkbox" bind:checked={shadersEnabled} on:change={() => localStorage.setItem('bartcode_shaders', shadersEnabled)} />
-          <span>Special Shaders (CRT effect)</span>
+          <span class="pref-label">Renderer</span>
+          <select class="pref-select" on:change={(e) => setRenderer(e.target.value)}>
+            <option value="geras" selected={renderer === 'geras'}>Geras</option>
+            <option value="thrasos" selected={renderer === 'thrasos'}>Thrasos</option>
+            <option value="zelos" selected={renderer === 'zelos'}>Zelos</option>
+          </select>
+        </label>
+        <label class="pref-row">
+          <input type="checkbox" bind:checked={soundEnabled} on:change={() => savePref('bartcode_sound', soundEnabled)} />
+          <span>Sound effects</span>
+        </label>
+        <label class="pref-row">
+          <span class="pref-label">Console theme</span>
+          <select class="pref-select" bind:value={theme} on:change={() => savePref('bartcode_theme', theme)}>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="amber">Amber</option>
+          </select>
         </label>
       </div>
     </div>

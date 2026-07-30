@@ -5,6 +5,14 @@ export const toolboxXML = `
     <block type="bart_key_pressed"></block>
     <block type="bart_last_key"></block>
     <block type="bart_any_key"></block>
+    <block type="bart_current_time"></block>
+  </category>
+  <category name="Tracking" colour="195">
+    <block type="bart_track_start"></block>
+    <block type="bart_track_stop_all"></block>
+    <block type="bart_track_stop"></block>
+    <block type="bart_track_col"></block>
+    <block type="bart_track_row"></block>
   </category>
   <category name="Screen" colour="160">
     <block type="bart_put"></block>

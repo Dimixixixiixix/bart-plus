@@ -1,4 +1,5 @@
 import * as Blockly from 'blockly';
+import { getAliases } from '../tracking.js';
 
 /* CAPS */
 
@@ -885,6 +886,97 @@ Blockly.Blocks['bart_any_key'] = {
     this.setOutput(true, 'Boolean');
     this.setColour(290);
     this.setTooltip('Returns true if any key is currently pressed.');
+    this.setHelpUrl('');
+  }
+};
+
+// current time
+Blockly.Blocks['bart_current_time'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('current')
+        .appendField(new Blockly.FieldDropdown([
+          ['time', 'full'],
+          ['seconds', 'seconds'],
+          ['minutes', 'minutes'],
+          ['hours', 'hours'],
+          ['day', 'day'],
+          ['month', 'month'],
+          ['year', 'year']
+        ]), 'UNIT');
+    this.setOutput(true, 'String');
+    this.setColour(290);
+    this.setTooltip('Returns the current date/time component as a string.');
+    this.setHelpUrl('');
+  }
+};
+
+// tracking
+Blockly.Blocks['bart_track_start'] = {
+  init: function() {
+    this.appendValueInput('COL')
+        .setCheck('Number')
+        .appendField('begin tracking char at c:');
+    this.appendValueInput('ROW')
+        .setCheck('Number')
+        .appendField('r:');
+    this.appendDummyInput()
+        .appendField('with alias')
+        .appendField(new Blockly.FieldTextInput('char1'), 'ALIAS');
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(195);
+    this.setTooltip('Tracks the character at the given column and row with an alias name.');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['bart_track_stop_all'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('stop tracking all chars');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(195);
+    this.setTooltip('Stops tracking all characters.');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['bart_track_stop'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('stop tracking')
+        .appendField(new Blockly.FieldTextInput('char1'), 'ALIAS');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(195);
+    this.setTooltip('Stops tracking the character with the given alias.');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['bart_track_col'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('column of')
+        .appendField(new Blockly.FieldDropdown(getAliases), 'ALIAS');
+    this.setOutput(true, 'Number');
+    this.setColour(195);
+    this.setTooltip('Returns the column of the tracked character.');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['bart_track_row'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('row of')
+        .appendField(new Blockly.FieldDropdown(getAliases), 'ALIAS');
+    this.setOutput(true, 'Number');
+    this.setColour(195);
+    this.setTooltip('Returns the row of the tracked character.');
     this.setHelpUrl('');
   }
 };

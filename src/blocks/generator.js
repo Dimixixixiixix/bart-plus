@@ -222,6 +222,37 @@ bartcodeGenerator.forBlock['bart_any_key'] = function(block, generator) {
   return ['ANYKEY', bartcodeGenerator.ORDER_ATOMIC];
 };
 
+bartcodeGenerator.forBlock['bart_current_time'] = function(block, generator) {
+  let unit = block.getFieldValue('UNIT');
+  return ['CURRENTTIME("' + unit + '")', bartcodeGenerator.ORDER_ATOMIC];
+};
+
+bartcodeGenerator.forBlock['bart_track_start'] = function(block, generator) {
+  let col = generator.valueToCode(block, 'COL', bartcodeGenerator.ORDER_NONE) || '0';
+  let row = generator.valueToCode(block, 'ROW', bartcodeGenerator.ORDER_NONE) || '0';
+  let alias = block.getFieldValue('ALIAS');
+  return 'TRACKSTART(' + col + ', ' + row + ', "' + alias + '")\n';
+};
+
+bartcodeGenerator.forBlock['bart_track_stop_all'] = function(block, generator) {
+  return 'TRACKSTOPALL\n';
+};
+
+bartcodeGenerator.forBlock['bart_track_stop'] = function(block, generator) {
+  let alias = block.getFieldValue('ALIAS');
+  return 'TRACKSTOP("' + alias + '")\n';
+};
+
+bartcodeGenerator.forBlock['bart_track_col'] = function(block, generator) {
+  let alias = block.getFieldValue('ALIAS');
+  return ['TRACKCOL("' + alias + '")', bartcodeGenerator.ORDER_ATOMIC];
+};
+
+bartcodeGenerator.forBlock['bart_track_row'] = function(block, generator) {
+  let alias = block.getFieldValue('ALIAS');
+  return ['TRACKROW("' + alias + '")', bartcodeGenerator.ORDER_ATOMIC];
+};
+
 bartcodeGenerator.forBlock['bart_true'] = function(block, generator) {
   return ['true', bartcodeGenerator.ORDER_ATOMIC];
 };
