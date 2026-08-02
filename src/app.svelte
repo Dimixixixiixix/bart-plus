@@ -180,7 +180,7 @@
     projectFile = params.get('projectfile');
 
     if (playermode) {
-      document.title = 'Bartcode Player';
+      document.title = 'Bart+ Player';
     }
 
     clearAliases();
@@ -194,7 +194,7 @@
 <div class="app-root" class:player-mode={playermode}>
   <nav class="navbar">
     <div class="navbar-left">
-      <div class="navbar-brand">Bartcode</div>
+      <div class="navbar-brand">Bart+</div>
       <div class="file-menu">
         <button class="file-btn" on:click={() => fileOpen = !fileOpen}>File</button>
         {#if fileOpen}
@@ -240,7 +240,6 @@
   </div>
 
   {#if prefsOpen}
-    <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
     <div class="modal-overlay" on:click={closePrefs}></div>
     <div class="modal">
       <div class="modal-header">
