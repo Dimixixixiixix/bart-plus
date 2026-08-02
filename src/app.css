@@ -105,7 +105,7 @@ body {
 
 .dropdown-item:hover {
   background: #darkgray;
-  color: #cc5e00;
+  color: cyan;
 }
 
 .tools-menu {
@@ -126,8 +126,8 @@ body {
 }
 
 .navbar-right button:hover {
-  background: #ffe8d1;
-  color: #cc5e00;
+  background: darkgray;
+  color: cyan;
 }
 
 .navbar-right button.stop-btn {
