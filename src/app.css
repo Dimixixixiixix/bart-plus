@@ -65,14 +65,14 @@ body {
   font-family: 'Ubuntu', sans-serif;
   background: #17acd1;
   color: #ffffff;
-  border: 1px solid #e07900;
+  border: 1px solid #1495b5;
   cursor: pointer;
   border-radius: 20px;
   transition: background 0.2s;
 }
 
 .file-btn:hover {
-  background: #e07900;
+  background: #127c96;
 }
 
 .file-dropdown {
@@ -119,7 +119,7 @@ body {
   font-family: 'Ubuntu', sans-serif;
   background: #ffffff;
   color: #black;
-  border: 1px solid #ffffff;
+  border: 1px solid #1495b5;
   cursor: pointer;
   border-radius: 20px;
   transition: background 0.2s, color 0.2s;
