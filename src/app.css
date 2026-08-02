@@ -63,7 +63,7 @@ body {
   font-size: 0.95rem;
   font-weight: bold;
   font-family: 'Ubuntu', sans-serif;
-  background: #ff8c1a;
+  background: #17acd1;
   color: #ffffff;
   border: 1px solid #e07900;
   cursor: pointer;
@@ -118,7 +118,7 @@ body {
   font-weight: bold;
   font-family: 'Ubuntu', sans-serif;
   background: #ffffff;
-  color: #ff7700;
+  color: #black;
   border: 1px solid #ffffff;
   cursor: pointer;
   border-radius: 20px;
