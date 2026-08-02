@@ -233,7 +233,7 @@ body {
 }
 
 .pref-select:hover {
-  border-color: #127c96;
+  border-color: #b8ccd1;
 }
 
 .pref-number {
@@ -286,7 +286,7 @@ body {
 
 .console-theme-dark {
   background: #0c0c0c;
-  color: #ff7700;
+  color: #ffffff;
   border: 1px solid #444444;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
 }
