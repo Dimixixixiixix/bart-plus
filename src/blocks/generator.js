@@ -23,6 +23,10 @@ bartcodeGenerator.forBlock['bart_put'] = function(block, generator) {
   return 'PRINT ' + textCode + '\n';
 };
 
+bartcodeGenerator.forBlock['bart_comment'] = function(block, generator) {
+  return '';
+};
+
 bartcodeGenerator.forBlock['bart_clear'] = function(block, generator) {
   return 'CLEAR\n';
 };
