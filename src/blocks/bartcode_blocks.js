@@ -1050,15 +1050,15 @@ Blockly.Blocks['bart_return'] = {
 
 Blockly.Blocks['bart_comment'] = {
   init: function() {
-    this.appendValueInput('TEXT')
+    this.appendValueInput('VALUE')
         .setCheck('String')
-        .appendField('put');
+        .appendField('// ');
     this.appendDummyInput()
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(60);
-    this.setTooltip('A comment block, its name is self explanatory.');
+    this.setTooltip('A comment block, helpful for organization..');
     this.setHelpUrl('');
   }
 };
