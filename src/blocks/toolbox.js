@@ -118,5 +118,7 @@ export const toolboxXML = `
       </value>
     </block>
   </category>
+  <category name="Comments" colour="60">
+   <block_type="bart_comment"></block>
 </xml>
 `;
