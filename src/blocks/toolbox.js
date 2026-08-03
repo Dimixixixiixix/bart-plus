@@ -120,5 +120,6 @@ export const toolboxXML = `
   </category>
   <category name="Comments" colour="60">
    <block_type="bart_comment"></block>
+  </category>
 </xml>
 `;
