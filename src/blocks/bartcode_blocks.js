@@ -16,10 +16,6 @@ Blockly.Blocks['bart_on_run'] = {
   }
 };
 
-/* COMMANDS */
-
-/* SCREEN */
-
 // put
 Blockly.Blocks['bart_put'] = {
   init: function() {
@@ -1048,6 +1044,21 @@ Blockly.Blocks['bart_return'] = {
     this.setNextStatement(false, null);
     this.setColour(20);
     this.setTooltip('Returns a value from a function.');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['bart_comment'] = {
+  init: function() {
+    this.appendValueInput('TEXT')
+        .setCheck('String')
+        .appendField('put');
+    this.appendDummyInput()
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(60);
+    this.setTooltip('A comment block, its name is self explanatory.');
     this.setHelpUrl('');
   }
 };
