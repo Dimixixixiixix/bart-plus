@@ -35,7 +35,7 @@ export function runBartcode(code, onOutputUpdate, onRamUpdate, onComplete) {
     }
   }
   
-  const WIDTH = 80;
+  const WIDTH = 60;
   const HEIGHT = 30;
   let grid = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(' '));
 
