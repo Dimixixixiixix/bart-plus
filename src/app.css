@@ -269,7 +269,7 @@ body {
 }
 
 .console {
-  width: calc(30ch + 30px);
+  width: calc(45ch + 30px);
   height: calc(30 * 1.2em + 30px);
   font-family: 'IBMFont', monospace;
   font-size: 16px;
