@@ -12,8 +12,8 @@ Blockly.Blocks['bart_on_run'] = {
     this.setColour(290);
     this.setTooltip('Runs the attached blocks when the run button is clicked. Blocks not connected to this event will not run.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
     this.hat = 'cap';
-    myBlock.getCommentText();
   }
 };
 
