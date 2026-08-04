@@ -470,7 +470,6 @@ Blockly.Blocks['bart_string'] = {
     this.setColour(160);
     this.setTooltip('A literal string.');
     this.setHelpUrl('');
-    this.setCommentText('My comment');
   }
 };
 
@@ -600,7 +599,6 @@ Blockly.Blocks['bart_number'] = {
     this.setColour(230);
     this.setTooltip('A literal number.');
     this.setHelpUrl('');
-    this.setCommentText('My comment');
   }
 };
 
