@@ -13,6 +13,7 @@ Blockly.Blocks['bart_on_run'] = {
     this.setTooltip('Runs the attached blocks when the run button is clicked. Blocks not connected to this event will not run.');
     this.setHelpUrl('');
     this.hat = 'cap';
+    myBlock.getCommentText();
   }
 };
 
