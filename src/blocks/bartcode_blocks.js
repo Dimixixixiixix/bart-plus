@@ -34,6 +34,7 @@ Blockly.Blocks['bart_put'] = {
     this.setColour(160);
     this.setTooltip('Prints text to the screen.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -47,6 +48,7 @@ Blockly.Blocks['bart_clear'] = {
     this.setColour(160);
     this.setTooltip('Clears the screen.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -75,6 +77,7 @@ Blockly.Blocks['bart_move'] = {
     this.setColour(160);
     this.setTooltip('Moves cursor from one position to another.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -94,6 +97,7 @@ Blockly.Blocks['bart_wait'] = {
     this.setColour(120);
     this.setTooltip('Pauses execution for a specified number of seconds.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -111,6 +115,7 @@ Blockly.Blocks['bart_repeat'] = {
     this.setColour(120);
     this.setTooltip('Repeats the contained blocks a specified number of times.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -126,6 +131,7 @@ Blockly.Blocks['bart_wait_until'] = {
     this.setColour(120);
     this.setTooltip('Waits until the condition is true.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -143,6 +149,7 @@ Blockly.Blocks['bart_while'] = {
     this.setColour(120);
     this.setTooltip('Repeats the contained blocks while the condition is true.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -244,7 +251,9 @@ Blockly.Blocks['bart_if_else'] = {
         this.removeInput('ELSE');
       }
     }
+      this.setCommentText('My comment');
   }
+
 };
 
 // Mutator container for if/else
@@ -257,6 +266,7 @@ Blockly.Blocks['bart_if_container'] = {
     this.setTooltip('');
     this.setHelpUrl('');
     this.contextMenu = false;
+  this.setCommentText('My comment');
   }
 };
 
@@ -270,6 +280,7 @@ Blockly.Blocks['bart_if_elseif_clause'] = {
     this.setTooltip('');
     this.setHelpUrl('');
     this.contextMenu = false;
+    this.setCommentText('My comment');
   }
 };
 
@@ -283,6 +294,7 @@ Blockly.Blocks['bart_if_else_clause'] = {
     this.setTooltip('');
     this.setHelpUrl('');
     this.contextMenu = false;
+    this.setCommentText('My comment');
   }
 };
 
@@ -379,6 +391,7 @@ Blockly.Blocks['bart_switch_case'] = {
         this.removeInput('DEFAULT');
       }
     }
+    this.setCommentText('My comment');
   }
 };
 
@@ -392,6 +405,7 @@ Blockly.Blocks['bart_switch_container'] = {
     this.setTooltip('');
     this.setHelpUrl('');
     this.contextMenu = false;
+    this.setCommentText('My comment');
   }
 };
 
@@ -405,6 +419,7 @@ Blockly.Blocks['bart_switch_case_clause'] = {
     this.setTooltip('');
     this.setHelpUrl('');
     this.contextMenu = false;
+    this.setCommentText('My comment');
   }
 };
 
@@ -418,6 +433,7 @@ Blockly.Blocks['bart_switch_default_clause'] = {
     this.setTooltip('');
     this.setHelpUrl('');
     this.contextMenu = false;
+    this.setCommentText('My comment');
   }
 };
 
@@ -434,6 +450,7 @@ Blockly.Blocks['bart_case'] = {
     this.setColour(120);
     this.setTooltip('A case clause for a switch statement.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -453,6 +470,7 @@ Blockly.Blocks['bart_string'] = {
     this.setColour(160);
     this.setTooltip('A literal string.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -467,6 +485,7 @@ Blockly.Blocks['bart_len'] = {
     this.setColour(160);
     this.setTooltip('Returns the length of a string.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -484,6 +503,7 @@ Blockly.Blocks['bart_char_at'] = {
     this.setColour(160);
     this.setTooltip('Gets the character at the given index in a string (0-based).');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -504,6 +524,7 @@ Blockly.Blocks['bart_substr'] = {
     this.setColour(160);
     this.setTooltip('Extracts a substring from start with given length.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -520,6 +541,7 @@ Blockly.Blocks['bart_join'] = {
     this.setColour(160);
     this.setTooltip('Joins two strings together.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -535,6 +557,7 @@ Blockly.Blocks['bart_to_number'] = {
     this.setColour(160);
     this.setTooltip('Converts a value to a number.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -548,6 +571,7 @@ Blockly.Blocks['bart_to_string'] = {
     this.setColour(160);
     this.setTooltip('Converts a value to a string.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -561,6 +585,7 @@ Blockly.Blocks['bart_to_boolean'] = {
     this.setColour(160);
     this.setTooltip('Converts a value to a boolean.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -575,6 +600,7 @@ Blockly.Blocks['bart_number'] = {
     this.setColour(230);
     this.setTooltip('A literal number.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -592,6 +618,7 @@ Blockly.Blocks['bart_add'] = {
     this.setColour(230);
     this.setTooltip('Adds two numbers together.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -609,6 +636,7 @@ Blockly.Blocks['bart_subtract'] = {
     this.setColour(230);
     this.setTooltip('Subtracts two numbers.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -626,6 +654,7 @@ Blockly.Blocks['bart_multiply'] = {
     this.setColour(230);
     this.setTooltip('Multiplies two numbers.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -643,6 +672,7 @@ Blockly.Blocks['bart_divide'] = {
     this.setColour(230);
     this.setTooltip('Divides two numbers.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -660,6 +690,7 @@ Blockly.Blocks['bart_rand'] = {
     this.setColour(230);
     this.setTooltip('Returns a random number between from and to.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -686,6 +717,7 @@ Blockly.Blocks['bart_logic_op'] = {
     this.setColour(210);
     this.setTooltip('Logical operation between two boolean values.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -700,6 +732,7 @@ Blockly.Blocks['bart_not'] = {
     this.setColour(210);
     this.setTooltip('Logical NOT operation.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -717,6 +750,7 @@ Blockly.Blocks['bart_equals'] = {
     this.setColour(210);
     this.setTooltip('Checks if two values are equal.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -731,6 +765,7 @@ Blockly.Blocks['bart_true'] = {
     this.setColour(210);
     this.setTooltip('Boolean true value.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -743,6 +778,7 @@ Blockly.Blocks['bart_false'] = {
     this.setColour(210);
     this.setTooltip('Boolean false value.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -762,6 +798,7 @@ Blockly.Blocks['bart_store'] = {
     this.setColour(330);
     this.setTooltip('Stores a value at memory address (0-511).');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -776,6 +813,7 @@ Blockly.Blocks['bart_load'] = {
     this.setColour(330);
     this.setTooltip('Loads a value from memory address (0-511).');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -789,6 +827,8 @@ Blockly.Blocks['bart_flush_ram'] = {
     this.setColour(330);
     this.setTooltip('Resets all memory to empty.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
+    this.setCommentText('My comment');
   }
 };
 
@@ -862,6 +902,7 @@ Blockly.Blocks['bart_key_pressed'] = {
     this.setColour(290);
     this.setTooltip('Returns true if the specified key is currently pressed.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -873,6 +914,7 @@ Blockly.Blocks['bart_last_key'] = {
     this.setColour(290);
     this.setTooltip('Returns the last key pressed as a string.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -884,6 +926,7 @@ Blockly.Blocks['bart_any_key'] = {
     this.setColour(290);
     this.setTooltip('Returns true if any key is currently pressed.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -905,6 +948,7 @@ Blockly.Blocks['bart_current_time'] = {
     this.setColour(290);
     this.setTooltip('Returns the current date/time component as a string.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -926,6 +970,7 @@ Blockly.Blocks['bart_track_start'] = {
     this.setColour(195);
     this.setTooltip('Tracks the character at the given column and row with an alias name.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -938,6 +983,7 @@ Blockly.Blocks['bart_track_stop_all'] = {
     this.setColour(195);
     this.setTooltip('Stops tracking all characters.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -951,6 +997,7 @@ Blockly.Blocks['bart_track_stop'] = {
     this.setColour(195);
     this.setTooltip('Stops tracking the character with the given alias.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -963,6 +1010,7 @@ Blockly.Blocks['bart_track_col'] = {
     this.setColour(195);
     this.setTooltip('Returns the column of the tracked character.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -975,6 +1023,7 @@ Blockly.Blocks['bart_track_row'] = {
     this.setColour(195);
     this.setTooltip('Returns the row of the tracked character.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -993,6 +1042,7 @@ Blockly.Blocks['bart_function'] = {
     this.setColour(20);
     this.setTooltip('Defines a function that can be called by name.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -1007,6 +1057,7 @@ Blockly.Blocks['bart_call_function'] = {
     this.setColour(20);
     this.setTooltip('Calls a function by name.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -1020,6 +1071,7 @@ Blockly.Blocks['bart_call_boolean'] = {
     this.setColour(20);
     this.setTooltip('Calls a function and returns a boolean value.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -1033,6 +1085,7 @@ Blockly.Blocks['bart_call_value'] = {
     this.setColour(20);
     this.setTooltip('Calls a function and returns a string or number value.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
@@ -1046,20 +1099,8 @@ Blockly.Blocks['bart_return'] = {
     this.setColour(20);
     this.setTooltip('Returns a value from a function.');
     this.setHelpUrl('');
+    this.setCommentText('My comment');
   }
 };
 
-Blockly.Blocks['bart_comment'] = {
-  init: function() {
-    this.appendValueInput('VALUE')
-        .setCheck('String')
-        .appendField('// ');
-    this.appendDummyInput()
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(60);
-    this.setTooltip('A comment block, helpful for organization..');
-    this.setHelpUrl('');
-  }
-};
+
